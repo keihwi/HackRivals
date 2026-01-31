@@ -1,6 +1,14 @@
 import customtkinter as ctk
+
 from PIL import Image
 import os
+
+from budgeting_tab import create_budgeting_tab
+from expenses_tab import create_expenses_tab
+from obligations_tab import create_obligations_tab
+from resources_tab import create_resources_tab
+from settings_tab import create_settings_tab
+
 
 # Appearance Mode: "light" or "dark", defaulted to dark
 ctk.set_appearance_mode("light")
@@ -97,19 +105,19 @@ class GirlMath(ctk.CTk):
         self.tabs = ctk.CTkTabview(self)
         self.tabs.pack(padx=20, pady=20, fill="both", expand=True)
 
+        # Add tabs
         self.tabs.add("Budgeting")
         self.tabs.add("Expenses")
         self.tabs.add("Obligations")
         self.tabs.add("Resources")
         self.tabs.add("Settings")
 
-        # Add content to Summary Tab
-        self.summary_label = ctk.CTkLabel(self.tabs.tab("Budgeting"), text="Welcome back! \n Total Balance: $5,240")
-        self.summary_label.pack(pady=40)
-
-        # Content for Settings Tab (Logout)
-        self.logout_button = ctk.CTkButton(self.tabs.tab("Settings"), text="Logout", fg_color="red", hover_color="darkred", command=self.logout_action)
-        self.logout_button.pack(pady=20)
+        # Populate each tab using the external files
+        create_budgeting_tab(self.tabs.tab("Budgeting"))
+        create_expenses_tab(self.tabs.tab("Expenses"))
+        create_obligations_tab(self.tabs.tab("Obligations"))
+        create_resources_tab(self.tabs.tab("Resources"))
+        create_settings_tab(self.tabs.tab("Settings"), self.logout_action)
 
     # Logout Function
     def logout_action(self):
