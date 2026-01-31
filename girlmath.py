@@ -1,4 +1,6 @@
 import customtkinter as ctk
+from PIL import Image
+import os
 
 # Appearance Mode: "light" or "dark", defaulted to dark
 ctk.set_appearance_mode("light")
@@ -28,22 +30,47 @@ class GirlMath(ctk.CTk):
         self.show_login()
 
     def show_login(self):
+        # Main login container
         # creates a container inside the window, self meaning GirlMath is that window
         self.login_frame = ctk.CTkFrame(self)
 
         # says to throw this onto the window and center it. Pad adds space above and below.
-        self.login_frame.pack(pady=20, padx=60, fill="both", expand=True)
+        self.login_frame.pack(pady=20, padx=20, fill="both", expand=True)
 
+
+        # Configure two columns: logo on left, login fields on right
+        self.login_frame.grid_columnconfigure(0, weight=1)
+        self.login_frame.grid_columnconfigure(1, weight=1)
+        self.login_frame.grid_rowconfigure(0, weight=1)
+
+        # Left side: Logo
         # creates a text box and throws it onto the window
-        self.label = ctk.CTkLabel(self.login_frame, text="GirlMath Login", font=("Verdana", 24))
+        # sticky = "nsew" makes its central north, east, west.
+        self.logo_frame = ctk.CTkFrame(self.login_frame, fg_color="transparent")
+        self.logo_frame.grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
+
+        logo_path = os.path.join(os.path.dirname(__file__), "images", "girl-math-logo.png")
+        self.logo_image = ctk.CTkImage(light_image=Image.open(logo_path), dark_image=Image.open(logo_path), size=(310, 200))
+        self.logo_label = ctk.CTkLabel(self.logo_frame, image=self.logo_image, text="")
+        self.logo_label.pack(expand=True)
+
+        # Right side: Login fields
+        self.fields_frame = ctk.CTkFrame(self.login_frame, fg_color="transparent")
+        self.fields_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
+
+        # Inner frame to center login fields vertically
+        self.fields_inner = ctk.CTkFrame(self.fields_frame, fg_color="transparent")
+        self.fields_inner.place(relx=0.5, rely=0.5, anchor="center")
+
+        self.label = ctk.CTkLabel(self.fields_inner, text="Welcome!", font=("Verdana", 24))
         self.label.pack(pady=12, padx=10)
 
         # Show="*" means it will add asterisks as passphrase is typed in. Throws onto screen.
-        self.passphrase_entry = ctk.CTkEntry(self.login_frame, placeholder_text="passphrase", show="*", font=("Verdana", 16))
+        self.passphrase_entry = ctk.CTkEntry(self.fields_inner, placeholder_text="passphrase", show="*", font=("Verdana", 16))
         self.passphrase_entry.pack(pady=12, padx=10)
 
         # creates a button and calls login function below. Throws it onto the window.
-        self.login_button = ctk.CTkButton(self.login_frame, text="Login", command=self.login_action, font=("Verdana", 16))
+        self.login_button = ctk.CTkButton(self.fields_inner, text="Login", command=self.login_action, font=("Verdana", 16))
         self.login_button.pack(pady=12, padx=10)
 
     def login_action(self):
