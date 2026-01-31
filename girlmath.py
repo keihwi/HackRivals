@@ -1,6 +1,7 @@
 import customtkinter as ctk
 
 from PIL import Image
+from PIL import ImageTk
 import os
 
 from budgeting_tab import create_budgeting_tab
@@ -26,7 +27,9 @@ class GirlMath(ctk.CTk):
         super().__init__()
 
         # title of the app
-        self.title("Girl Math")
+        self.title("GirlMath")
+
+        self.after(200, lambda: self.iconbitmap(os.path.join(os.path.dirname(__file__), "images", "girl-math-logo-acronym.ico")))
 
         # Default window size, can be changed later
         self.geometry("600x450")
