@@ -95,7 +95,7 @@ class GirlMath(ctk.CTk):
 
     def login_action(self):
         # Passphrase
-        if self.passphrase_entry.get() == "Picture JohnCena SpaceX":
+        if self.passphrase_entry.get() == " ":
             # Remove login screen
             self.login_frame.destroy()
             # Show dashboard
