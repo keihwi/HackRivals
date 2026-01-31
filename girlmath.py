@@ -33,6 +33,8 @@ class GirlMath(ctk.CTk):
         # Main login container
         # creates a container inside the window, self meaning GirlMath is that window
         self.login_frame = ctk.CTkFrame(self)
+        # change the frame color forcefully
+        self.login_frame.configure(fg_color="white")
 
         # says to throw this onto the window and center it. Pad adds space above and below.
         self.login_frame.pack(pady=20, padx=20, fill="both", expand=True)
@@ -43,20 +45,27 @@ class GirlMath(ctk.CTk):
         self.login_frame.grid_columnconfigure(1, weight=1)
         self.login_frame.grid_rowconfigure(0, weight=1)
 
+
         # Left side: Logo
         # creates a text box and throws it onto the window
         # sticky = "nsew" makes its central north, east, west.
         self.logo_frame = ctk.CTkFrame(self.login_frame, fg_color="transparent")
         self.logo_frame.grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
 
+
+
         logo_path = os.path.join(os.path.dirname(__file__), "images", "girl-math-logo.png")
         self.logo_image = ctk.CTkImage(light_image=Image.open(logo_path), dark_image=Image.open(logo_path), size=(310, 200))
         self.logo_label = ctk.CTkLabel(self.logo_frame, image=self.logo_image, text="")
         self.logo_label.pack(expand=True)
 
+        
+
         # Right side: Login fields
         self.fields_frame = ctk.CTkFrame(self.login_frame, fg_color="transparent")
         self.fields_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
+        self.fields_frame.configure(fg_color="#F2F1ED")
+        
 
         # Inner frame to center login fields vertically
         self.fields_inner = ctk.CTkFrame(self.fields_frame, fg_color="transparent")
