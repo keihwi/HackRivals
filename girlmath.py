@@ -104,6 +104,7 @@ class GirlMath(ctk.CTk):
     def show_dashboard(self):
         self.tabs = ctk.CTkTabview(self)
         self.tabs.pack(padx=20, pady=20, fill="both", expand=True)
+        self.tabs._segmented_button.configure(font=("Bauhaus 93", 20))
 
         # Add tabs
         self.tabs.add("Budgeting")
