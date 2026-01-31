@@ -1,10 +1,9 @@
 import customtkinter as ctk
 
 # Appearance Mode: "light" or "dark", defaulted to dark
-ctk.set_appearance_mode("dark")
+ctk.set_appearance_mode("light")
 
-# Color Theme: "blue", "green", or "dark-blue" WILL BE CHANGED WITH JSON FILE
-ctk.set_default_color_theme("green")
+ctk.set_default_color_theme("girl-math.json")
 
 # ctk.CTk means we want the app to act exactly like a standard window (inheritance)
 class GirlMath(ctk.CTk):
@@ -36,15 +35,15 @@ class GirlMath(ctk.CTk):
         self.login_frame.pack(pady=20, padx=60, fill="both", expand=True)
 
         # creates a text box and throws it onto the window
-        self.label = ctk.CTkLabel(self.login_frame, text="GirlMath Login", font=("Roboto", 24))
+        self.label = ctk.CTkLabel(self.login_frame, text="GirlMath Login", font=("Verdana", 24))
         self.label.pack(pady=12, padx=10)
 
         # Show="*" means it will add asterisks as passphrase is typed in. Throws onto screen.
-        self.passphrase_entry = ctk.CTkEntry(self.login_frame, placeholder_text="passphrase", show="*")
+        self.passphrase_entry = ctk.CTkEntry(self.login_frame, placeholder_text="passphrase", show="*", font=("Verdana", 16))
         self.passphrase_entry.pack(pady=12, padx=10)
 
         # creates a button and calls login function below. Throws it onto the window.
-        self.login_button = ctk.CTkButton(self.login_frame, text="Login", command=self.login_action)
+        self.login_button = ctk.CTkButton(self.login_frame, text="Login", command=self.login_action, font=("Verdana", 16))
         self.login_button.pack(pady=12, padx=10)
 
     def login_action(self):
@@ -55,7 +54,7 @@ class GirlMath(ctk.CTk):
             # Show dashboard
             self.show_dashboard()
         else:
-            self.label.configure(text="Wrong passphrase!", text_color="red")
+            self.label.configure(text="Wrong passphrase!", text_color="red", font=("Verdana", 16))
 
     # Show Dashboard Function
     def show_dashboard(self):
