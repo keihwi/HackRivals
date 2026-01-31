@@ -27,7 +27,7 @@ def create_budgeting_tab(parent):
     jobs_frame.pack_propagate(False)
 
     # Title
-    ctk.CTkLabel(jobs_frame, text="Jobs", font=("Arial Rounded MT Bold", 20),
+    ctk.CTkLabel(jobs_frame, text="Jobs", font=("Bauhaus 93", 20),
                  text_color="black", fg_color="transparent").pack(pady=(10, 5))
 
     # Input row
@@ -59,21 +59,19 @@ def create_budgeting_tab(parent):
 
     # Total label inside jobs widget
     total_label = ctk.CTkLabel(jobs_frame, text="Total Monthly Revenue: $0.00",
-                               font=("Arial Rounded MT Bold", 14), text_color="black",
+                               font=("Bauhaus 93", 14), text_color="black",
                                fg_color="transparent")
     total_label.pack(pady=(5, 10))
 
-    # --- Monthly Revenue Summary ---
+    # Monthly Revenue Summary
     summary_frame = ctk.CTkFrame(frame, fg_color="#FFFFFF", corner_radius=15, width=400,
                                  border_width=2, border_color="#F7DDE8")
     summary_frame.pack(anchor="nw", padx=20, pady=(0, 20))
+    summary_frame.pack_propagate(False)
 
     ctk.CTkLabel(summary_frame, text="Monthly Revenue Summary",
-                 font=("Arial Rounded MT Bold", 20), text_color="black",
+                 font=("Bauhaus 93", 20), text_color="black",
                  fg_color="transparent").pack(pady=(10, 5))
-
-    summary_list_frame = ctk.CTkFrame(summary_frame, fg_color="transparent")
-    summary_list_frame.pack(padx=15, pady=5, fill="x")
 
     summary_total_label = ctk.CTkLabel(summary_frame, text="Total: $0.00",
                                        font=("Arial Rounded MT Bold", 16),
@@ -88,18 +86,7 @@ def create_budgeting_tab(parent):
         save_data({"jobs": jobs})
 
     def update_summary():
-        for widget in summary_list_frame.winfo_children():
-            widget.destroy()
-        total = 0.0
-        for job in jobs:
-            monthly = job["monthly"]
-            total += monthly
-            row = ctk.CTkFrame(summary_list_frame, fg_color="transparent")
-            row.pack(fill="x", pady=1)
-            ctk.CTkLabel(row, text=job["name"], font=("Arial Rounded MT Bold", 13),
-                         text_color="black", fg_color="transparent").pack(side="left", padx=(5, 0))
-            ctk.CTkLabel(row, text=f"${monthly:,.2f}/mo", font=("Arial Rounded MT Bold", 13),
-                         text_color="black", fg_color="transparent").pack(side="right", padx=(0, 5))
+        total = sum(job["monthly"] for job in jobs)
         summary_total_label.configure(text=f"Total: ${total:,.2f}")
 
     def update_total():
