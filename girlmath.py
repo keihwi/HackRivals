@@ -101,7 +101,7 @@ class GirlMath(ctk.CTk):
             # Show dashboard
             self.show_dashboard()
         else:
-            self.label.configure(text="Wrong passphrase!", text_color="red", font=("Verdana", 16))
+            self.label.configure(text="Wrong passphrase!", text_color="red", font=("Bauhaus 93", 16))
 
     # Show Dashboard Function
     def show_dashboard(self):
