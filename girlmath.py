@@ -62,15 +62,15 @@ class GirlMath(ctk.CTk):
         self.fields_inner = ctk.CTkFrame(self.fields_frame, fg_color="transparent")
         self.fields_inner.place(relx=0.5, rely=0.5, anchor="center")
 
-        self.label = ctk.CTkLabel(self.fields_inner, text="Welcome!", font=("Verdana", 24))
+        self.label = ctk.CTkLabel(self.fields_inner, text="Welcome!", font=("Bauhaus 93", 24))
         self.label.pack(pady=12, padx=10)
 
         # Show="*" means it will add asterisks as passphrase is typed in. Throws onto screen.
-        self.passphrase_entry = ctk.CTkEntry(self.fields_inner, placeholder_text="passphrase", show="*", font=("Verdana", 16))
+        self.passphrase_entry = ctk.CTkEntry(self.fields_inner, placeholder_text="passphrase", show="*", font=("Bauhaus 93", 15), justify="center" )
         self.passphrase_entry.pack(pady=12, padx=10)
 
         # creates a button and calls login function below. Throws it onto the window.
-        self.login_button = ctk.CTkButton(self.fields_inner, text="Login", command=self.login_action, font=("Verdana", 16))
+        self.login_button = ctk.CTkButton(self.fields_inner, text="Login", command=self.login_action, font=("Bauhaus 93", 16))
         self.login_button.pack(pady=12, padx=10)
 
     def login_action(self):
