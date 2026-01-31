@@ -97,13 +97,14 @@ class GirlMath(ctk.CTk):
         self.tabs = ctk.CTkTabview(self)
         self.tabs.pack(padx=20, pady=20, fill="both", expand=True)
 
-        self.tabs.add("Summary")
+        self.tabs.add("Budgeting")
         self.tabs.add("Expenses")
-        self.tabs.add("Savings")
+        self.tabs.add("Obligations")
+        self.tabs.add("Resources")
         self.tabs.add("Settings")
 
         # Add content to Summary Tab
-        self.summary_label = ctk.CTkLabel(self.tabs.tab("Summary"), text="Welcome back! \n Total Balance: $5,240")
+        self.summary_label = ctk.CTkLabel(self.tabs.tab("Budgeting"), text="Welcome back! \n Total Balance: $5,240")
         self.summary_label.pack(pady=40)
 
         # Content for Settings Tab (Logout)
