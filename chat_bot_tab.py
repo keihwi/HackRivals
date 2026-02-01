@@ -3,7 +3,7 @@ import customtkinter as ctk
 from google import genai
 from google.genai import types
 
-# 1. Initialize Client with v1beta
+# initialize client with v1beta
 # System instructions are much more stable on v1beta
 client = genai.Client(
     api_key="CHANGE", #stores api key for functions to use
@@ -36,7 +36,7 @@ def create_chatbot_tab(parent):
         chat_display.insert("end", f"{sender}: {message}\n\n") #adds the text based on sender and message
         chat_display.configure(state="disabled")
         chat_display.see("end")
-        #takes user text, sends to to gemini and updates panel, gemini writes a response and updates on panel
+        # takes user text, sends to to gemini and updates panel, gemini writes a response and updates on panel
     def send_message():
         user_text = user_entry.get()
         if not user_text.strip():
@@ -51,11 +51,11 @@ def create_chatbot_tab(parent):
         # Run API call in a separate thread so the UI doesn't freeze
         def fetch_ai_response():
             try:
-                response = client.models.generate_content( #prompts gemini
+                response = client.models.generate_content( # prompts gemini
                     model="gemini-2.5-flash", 
                     config=types.GenerateContentConfig(
                         system_instruction=finance_system_instruction,
-                        temperature=0.2, #makes bot more serious
+                        temperature=0.2, # makes bot more serious
                     ),
                     contents=user_text
                 )
@@ -65,7 +65,7 @@ def create_chatbot_tab(parent):
 
             # Remove the "Thinking..." line and post real response
             frame.after(0, lambda: finalize_chat(final_text))
-    #removes loaidng symbol and outputs message.
+    # removes loading symbol and outputs message.
         def finalize_chat(text):
             chat_display.configure(state="normal")
             # Deletes the "Thinking..." message (last 2 lines)
@@ -75,9 +75,9 @@ def create_chatbot_tab(parent):
 
         threading.Thread(target=fetch_ai_response, daemon=True).start()
 
-    # Initial Welcome message
+    # initial welcome message
     update_chat("GirlMathBot", "Hi! I'm GirlMathBot. What do you need help with today?")
-    #send button code
+    # send button code
     send_btn = ctk.CTkButton(input_frame, text="Send", width=80, command=send_message)
     send_btn.pack(side="right")
     user_entry.bind("<Return>", lambda event: send_message())

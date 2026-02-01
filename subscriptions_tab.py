@@ -7,7 +7,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 DATA_FILE = "subscriptions_data.json"
 
-# --- Data Helpers ---
+# Data helpers
 def load_subs():
     if os.path.exists(DATA_FILE):
         try:
@@ -22,10 +22,9 @@ def save_subs(data):
         json.dump(data, f, indent=4)
 
 def get_next_payment_date(sub):
-    """
-    Parses '15th', '5', etc. and calculates the next specific calendar date.
-    Returns datetime.max if no number is found, putting it at the bottom of the list.
-    """
+    # Parses '15th', etc. and calculates the next specific calendar date.
+    # Returns datetime.max if no number is found, putting it at the bottom of the list.
+
     date_str = sub.get('date', '')
     
     # Extract digits (e.g. "15th" -> 15)
@@ -35,7 +34,7 @@ def get_next_payment_date(sub):
         return datetime.max
 
     day = int(digits)
-    # Basic clamping if user entered 99
+    # Basic "clamping" (terminology is correct I think?) if user entered 99
     if day > 31: day = 31 
     if day < 1: day = 1
     
@@ -78,7 +77,7 @@ def create_subscriptions_tab(parent):
         render_home(tab_home)
         render_stats(tab_stats)
 
-    # --- PAGE 1: HOME ---
+    # Home Page
     def render_home(frame):
         for widget in frame.winfo_children():
             widget.destroy()
@@ -107,14 +106,14 @@ def create_subscriptions_tab(parent):
         content_scroll = ctk.CTkScrollableFrame(frame, fg_color="transparent")
         content_scroll.pack(fill="both", expand=True, padx=20)
 
-        # --- UPCOMING PAYMENTS SECTION ---
+        # Upcoming Payments Section!!
         ctk.CTkLabel(content_scroll, text="UPCOMING PAYMENTS", font=("Cooper Black", 20)).pack(anchor="w", pady=(10, 5))
         
         upcoming_count = 0
         for s in sorted_subs:
             if upcoming_count >= 3: break
             
-            # Only show if there is a digit in the date string
+            # Only show if there is a digit in the date string :')
             if any(char.isdigit() for char in s.get('date', '')):
                 ctk.CTkLabel(content_scroll, 
                              text=f"• {s['name']} - Due: {s['date']}", 
@@ -124,10 +123,10 @@ def create_subscriptions_tab(parent):
         if upcoming_count == 0:
             ctk.CTkLabel(content_scroll, text="No immediate upcoming dates found.", font=("Arial", 12, "italic"), text_color="gray").pack(anchor="w", padx=15)
 
-        # --- ALL SUBSCRIPTIONS SECTION ---
+        # All Subs Section
         ctk.CTkLabel(content_scroll, text="ALL SUBSCRIPTIONS", font=("Cooper Black", 20)).pack(anchor="w", pady=(20, 5))
         
-        # We use the original 'subs' list here so indices match for the Delete button
+        # 'subs' list here so indices match for the Delete button
         for i, s in enumerate(subs):
             item = ctk.CTkFrame(content_scroll, height=50, corner_radius=10)
             item.pack(fill="x", pady=3, padx=5)
@@ -135,7 +134,7 @@ def create_subscriptions_tab(parent):
             ctk.CTkLabel(item, text=f"{s['name']}", font=("Arial Rounded MT Bold", 13)).pack(side="left", padx=(15, 5))
             ctk.CTkLabel(item, text=f"({s['category']})", font=("Arial Rounded MT Bold", 11), text_color="gray").pack(side="left")
 
-            # The Delete Button
+            # The Delete Button (similar to budgeting_tab delete button)
             del_btn = ctk.CTkButton(item, text="✕", width=28, height=28, 
                                     fg_color="#F7DDE8", hover_color="#EBC5D6",
                                     font=("Arial Rounded MT Bold", 12),
@@ -151,7 +150,7 @@ def create_subscriptions_tab(parent):
             save_subs(subs)
             refresh_all()
 
-    # --- PAGE 2: CATEGORIES ---
+    # Categories Page
     def add_sub_logic(cat):
         # Dialogs to capture data
         name_dialog = ctk.CTkInputDialog(text=f"Enter name for {cat}:", title="Subscription Name")
@@ -196,7 +195,7 @@ def create_subscriptions_tab(parent):
         )
         btn.grid(row=i//3, column=i%3, padx=15, pady=15)
 
-    # --- PAGE 3: STATISTICS ---
+    # Statistics Page
     def render_stats(frame):
         for widget in frame.winfo_children():
             widget.destroy()
@@ -228,11 +227,11 @@ def create_subscriptions_tab(parent):
             autopct='%1.1f%%', 
             startangle=140,
             colors=colors,
-            # This sets the props for the Category Labels (outside the pie)
+            # Sets style outside the pie chart for hovering labels
             textprops={'fontname': 'Arial Rounded MT Bold', 'color': '#434242', 'size' : 14}
         )
         
-        # Explicitly set style for the Percentages (inside the pie)
+        # Set style inside the slices
         plt.setp(autotexts, size=14, weight="bold", color="#434242", family="Arial Rounded MT Bold")
 
         ax.set_title("YEARLY SPENDING BY CATEGORY", fontdict={'family': 'Cooper Black', 'size': 18, 'color':'#434242'})
@@ -253,6 +252,6 @@ def create_subscriptions_tab(parent):
                 text_color="#434242"
             ).pack(side="left", padx=10)
 
-    # Initial Render
+    # Initial Render :D
     refresh_all()
     return main_container

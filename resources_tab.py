@@ -21,7 +21,7 @@ PROFESSIONALRESOURCES = {
 
 
 def create_resources_tab(parent):
-    # 1. Create a Scrollable Frame instead of a regular Frame
+    # Create a scrollable frame instead of a regular frame
     # 'parent' is the tabview or main window. creates spacing for next element.
     scroll_frame = ctk.CTkScrollableFrame(parent, fg_color="transparent")
     scroll_frame.pack(fill="both", expand=True, padx=10, pady=10)
@@ -30,10 +30,10 @@ def create_resources_tab(parent):
     title = ctk.CTkLabel(scroll_frame, text="Resources", font=("Cooper Black", 26), text_color=("#434242"))
     title.pack(pady=(10, 20))
 
-    #Credit Scores
+    # Credit Scores
     credit_label = ctk.CTkLabel(scroll_frame, text="Free Credit Score Checks:", font=("Arial Rounded MT Bold", 18), text_color=("#434242"))
     credit_label.pack(anchor="w", padx=30, pady=(10, 5))
-    #iterates each credit score link and prints them on the page.
+    # iterates each credit score link and prints them on the page.
     for name, url in CREDITRESOURCES.items():
         link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Arial Rounded MT Bold", 14, "underline")) 
         link.pack(anchor="w", padx=45, pady=2) 
@@ -48,10 +48,10 @@ def create_resources_tab(parent):
         link.pack(anchor="w", padx=45, pady=2) 
         link.bind("<Button-1>", lambda e, u=url: webbrowser.open(u))
 
-    #Section: Professional resources
+    # Section: Professional resources
     abuse_label = ctk.CTkLabel(scroll_frame, text="Professional Resources:", font=("Arial Rounded MT Bold", 18), text_color=("#434242"))
     abuse_label.pack(anchor="w", padx=30, pady=(20, 5))
-    #iterates each professional source link and prints them on the page.
+    # iterates each professional source link and prints them on the page.
     for name, url in PROFESSIONALRESOURCES.items():
         link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Arial Rounded MT Bold", 14, "underline")) 
         link.pack(anchor="w", padx=45, pady=2) 
