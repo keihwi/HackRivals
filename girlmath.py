@@ -7,6 +7,17 @@ import sys
 import json
 import matplotlib.pyplot as plt
 
+# HELPER FUNCTION FOR EXECUTABLE FILE
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 from budgeting_tab import create_budgeting_tab
 from subscriptions_tab import create_subscriptions_tab
 from obligations_tab import create_obligations_tab
@@ -18,7 +29,7 @@ from settings_tab import create_settings_tab
 # Appearance Mode: "light" or "dark", defaulted to dark
 ctk.set_appearance_mode("light")
 
-ctk.set_default_color_theme("girl-math.json")
+ctk.set_default_color_theme(resource_path("girl-math.json"))
 
 # ctk.CTk means we want the app to act exactly like a standard window (inheritance)
 class GirlMath(ctk.CTk):
@@ -36,7 +47,8 @@ class GirlMath(ctk.CTk):
         # title of the app
         self.title("GirlMath")
 
-        self.after(200, lambda: self.iconbitmap(os.path.join(os.path.dirname(__file__), "images", "girl-math-logo-acronym.ico")))
+        icon_path = resource_path(os.path.join("images", "girl-math-logo-acronym.ico"))
+        self.after(200, lambda: self.iconbitmap(icon_path))
 
         # Default window size, can be changed later
         self.geometry("800x450")
@@ -102,7 +114,8 @@ class GirlMath(ctk.CTk):
 
 
 
-        logo_path = os.path.join(os.path.dirname(__file__), "images", "girl-math-logo.png")
+        logo_path = resource_path(os.path.join("images", "girl-math-logo.png"))
+        
         self.logo_image = ctk.CTkImage(light_image=Image.open(logo_path), dark_image=Image.open(logo_path), size=(310, 200))
         self.logo_label = ctk.CTkLabel(self.logo_frame, image=self.logo_image, text="")
         self.logo_label.pack(expand=True)
