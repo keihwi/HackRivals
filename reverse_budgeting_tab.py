@@ -37,7 +37,7 @@ def create_reverse_budgeting_tab(parent):
 
     # Switch button at bottom
     ctk.CTkButton(frame, text="← Budgeting", font=("Arial Rounded MT Bold", 14),
-                  fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                  fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="#434242",
                   corner_radius=8, width=180,
                   command=switch_to_budgeting).pack(anchor="se", side="bottom", padx=20, pady=10)
 
@@ -57,12 +57,12 @@ def create_reverse_budgeting_tab(parent):
     summary_frame.pack_propagate(False)
 
     ctk.CTkLabel(summary_frame, text="Annual Need",
-                 font=("Cooper Black", 20), text_color="black",
+                 font=("Cooper Black", 20), text_color="#434242",
                  fg_color="transparent").pack(pady=(10, 5))
 
     summary_total_label = ctk.CTkLabel(summary_frame, text="Total: $0.00 / year",
                                        font=("Arial Rounded MT Bold", 16),
-                                       text_color="black", fg_color="transparent")
+                                       text_color="#434242", fg_color="transparent")
     summary_total_label.pack(pady=(5, 10))
 
     # Savings Goal Box
@@ -72,7 +72,7 @@ def create_reverse_budgeting_tab(parent):
     savings_frame.pack_propagate(False)
 
     ctk.CTkLabel(savings_frame, text="Savings Goal",
-                 font=("Cooper Black", 20), text_color="black",
+                 font=("Cooper Black", 20), text_color="#434242",
                  fg_color="transparent").pack(pady=(10, 5))
 
     savings_input_frame = ctk.CTkFrame(savings_frame, fg_color="transparent")
@@ -83,7 +83,7 @@ def create_reverse_budgeting_tab(parent):
     savings_entry.pack(side="left", padx=(10, 5))
 
     savings_display_label = ctk.CTkLabel(savings_frame, text="Savings Goal: $0.00 / year",
-                                          font=("Arial Rounded MT Bold", 14), text_color="black")
+                                          font=("Arial Rounded MT Bold", 14), text_color="#434242")
     savings_display_label.pack(pady=(0, 10))
 
     def set_savings_goal():
@@ -98,7 +98,7 @@ def create_reverse_budgeting_tab(parent):
         update_all()
 
     ctk.CTkButton(savings_input_frame, text="Set", font=("Arial Rounded MT Bold", 13),
-                  fg_color="#B8D4E3", hover_color="#9FC4D6", text_color="black",
+                  fg_color="#B8D4E3", hover_color="#9FC4D6", text_color="#434242",
                   corner_radius=8, width=60, command=set_savings_goal).pack(side="left", padx=5)
 
     # ── RIGHT CONTAINER — Expense Tracker ──
@@ -111,10 +111,10 @@ def create_reverse_budgeting_tab(parent):
     header_frame.pack(fill="x", padx=10, pady=(10, 5))
 
     ctk.CTkLabel(header_frame, text="Expense Tracker", font=("Cooper Black", 20),
-                 text_color="black", fg_color="transparent").pack(side="left", padx=10)
+                 text_color="#434242", fg_color="transparent").pack(side="left", padx=10)
 
     clear_btn = ctk.CTkButton(header_frame, text="Clear", font=("Arial Rounded MT Bold", 12),
-                               fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                               fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="#434242",
                                corner_radius=8, width=60, command=lambda: clear_expenses())
     clear_btn.pack(side="right", padx=10)
 
@@ -130,10 +130,10 @@ def create_reverse_budgeting_tab(parent):
     wants_col.grid(row=0, column=0, sticky="nsew", padx=5)
 
     ctk.CTkLabel(wants_col, text="WANTS", font=("Cooper Black", 16),
-                 text_color="black").pack(pady=(5, 2))
+                 text_color="#434242").pack(pady=(5, 2))
 
     wants_annual_label = ctk.CTkLabel(wants_col, text="Wants: $0.00/yr",
-                                      font=("Arial Rounded MT Bold", 11), text_color="black")
+                                      font=("Arial Rounded MT Bold", 11), text_color="#434242")
     wants_annual_label.pack()
 
     wants_list = ctk.CTkScrollableFrame(wants_col, fg_color="#FFF5F9", corner_radius=8, height=200)
@@ -144,10 +144,10 @@ def create_reverse_budgeting_tab(parent):
     needs_col.grid(row=0, column=1, sticky="nsew", padx=5)
 
     ctk.CTkLabel(needs_col, text="NEEDS", font=("Cooper Black", 16),
-                 text_color="black").pack(pady=(5, 2))
+                 text_color="#434242").pack(pady=(5, 2))
 
     needs_annual_label = ctk.CTkLabel(needs_col, text="Needs: $0.00/yr",
-                                      font=("Arial Rounded MT Bold", 11), text_color="black")
+                                      font=("Arial Rounded MT Bold", 11), text_color="#434242")
     needs_annual_label.pack()
 
     needs_list = ctk.CTkScrollableFrame(needs_col, fg_color="#F0FFF0", corner_radius=8, height=200)
@@ -169,18 +169,18 @@ def create_reverse_budgeting_tab(parent):
     freq_menu = ctk.CTkOptionMenu(entry_frame, values=list(FREQUENCY_OPTIONS.keys()),
                                    variable=freq_var, font=("Arial Rounded MT Bold", 11),
                                    fg_color="#E8E8E8", button_color="#D0D0D0",
-                                   button_hover_color="#C0C0C0", text_color="black",
+                                   button_hover_color="#C0C0C0", text_color="#434242",
                                    corner_radius=8, width=130)
     freq_menu.pack(side="left", padx=(0, 5))
 
     want_btn = ctk.CTkButton(entry_frame, text="Want", font=("Arial Rounded MT Bold", 13),
-                             fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                             fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="#434242",
                              corner_radius=8, width=60,
                              command=lambda: add_expense("want"))
     want_btn.pack(side="left", padx=3)
 
     need_btn = ctk.CTkButton(entry_frame, text="Need", font=("Arial Rounded MT Bold", 13),
-                             fg_color="#D5ECD4", hover_color="#BDD9BC", text_color="black",
+                             fg_color="#D5ECD4", hover_color="#BDD9BC", text_color="#434242",
                              corner_radius=8, width=60,
                              command=lambda: add_expense("need"))
     need_btn.pack(side="left", padx=3)
@@ -217,12 +217,12 @@ def create_reverse_budgeting_tab(parent):
                 row = ctk.CTkFrame(wants_list, fg_color="#FFFFFF", corner_radius=6)
                 row.pack(fill="x", pady=2, padx=2)
                 ctk.CTkLabel(row, text=text, font=("Arial Rounded MT Bold", 10),
-                             text_color="black").pack(side="left", padx=5, pady=3)
+                             text_color="#434242").pack(side="left", padx=5, pady=3)
             elif t.get("category") == "need":
                 row = ctk.CTkFrame(needs_list, fg_color="#FFFFFF", corner_radius=6)
                 row.pack(fill="x", pady=2, padx=2)
                 ctk.CTkLabel(row, text=text, font=("Arial Rounded MT Bold", 10),
-                             text_color="black").pack(side="left", padx=5, pady=3)
+                             text_color="#434242").pack(side="left", padx=5, pady=3)
 
     def add_expense(category):
         description = desc_entry.get().strip()
