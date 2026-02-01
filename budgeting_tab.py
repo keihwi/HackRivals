@@ -20,6 +20,14 @@ def save_data(data):
 def create_budgeting_tab(parent):
     frame = parent
 
+    # Reverse Budgeting toggle button
+    from reverse_budgeting_tab import create_reverse_budgeting_tab
+
+    def switch_to_reverse():
+        for widget in frame.winfo_children():
+            widget.destroy()
+        create_reverse_budgeting_tab(frame)
+
     # Jobs Revenue Widget
     jobs_frame = ctk.CTkFrame(frame, fg_color="#FFFFFF", corner_radius=15, width=400,
                               border_width=2, border_color="#F7DDE8")
@@ -38,19 +46,15 @@ def create_budgeting_tab(parent):
                               font=("Arial Rounded MT Bold", 12), corner_radius=8, width=120)
     name_entry.pack(side="left", padx=(0, 5))
 
-    rate_entry = ctk.CTkEntry(input_frame, placeholder_text="$/hr",
-                              font=("Arial Rounded MT Bold", 12), corner_radius=8, width=70)
-    rate_entry.pack(side="left", padx=(0, 5))
-
-    hours_entry = ctk.CTkEntry(input_frame, placeholder_text="hrs/wk",
-                               font=("Arial Rounded MT Bold", 12), corner_radius=8, width=70)
-    hours_entry.pack(side="left", padx=(0, 5))
+    monthly_entry = ctk.CTkEntry(input_frame, placeholder_text="$/month",
+                                 font=("Arial Rounded MT Bold", 12), corner_radius=8, width=90)
+    monthly_entry.pack(side="left", padx=(0, 5))
 
     add_btn = ctk.CTkButton(input_frame, text="Add", font=("Arial Rounded MT Bold", 14),
                             fg_color="#F7DDE8", hover_color="#EBC5D6",
                             text_color="black", corner_radius=8, width=60,
                             command=lambda: add_job())
-    add_btn.pack(side="left")
+    add_btn.pack(side="right")
 
     # Scrollable job list
     job_list_frame = ctk.CTkScrollableFrame(jobs_frame, fg_color="transparent",
@@ -121,7 +125,7 @@ def create_budgeting_tab(parent):
         row = ctk.CTkFrame(job_list_frame, fg_color="#FFFFFF", corner_radius=8)
         row.pack(fill="x", pady=2)
 
-        text = f"{job['name']}  —  ${job['rate']:.2f}/hr  ×  {job['hours']:.1f} hrs/wk  =  ${job['monthly']:,.2f}/mo"
+        text = f"{job['name']}  —  ${job['monthly']:,.2f}/mo"
         ctk.CTkLabel(row, text=text, font=("Arial Rounded MT Bold", 11),
                      text_color="black", fg_color="transparent").pack(side="left", padx=8, pady=4)
 
@@ -134,27 +138,29 @@ def create_budgeting_tab(parent):
     def add_job():
         name = name_entry.get().strip()
         try:
-            rate = float(rate_entry.get())
-            hours = float(hours_entry.get())
+            monthly = float(monthly_entry.get())
         except ValueError:
             return
         if not name:
             return
 
-        monthly = rate * hours * 4
-        job = {"name": name, "rate": rate, "hours": hours, "monthly": monthly}
+        job = {"name": name, "monthly": monthly}
         jobs.append(job)
         persist()
         create_job_row(len(jobs) - 1, job)
         update_total()
 
         name_entry.delete(0, "end")
-        rate_entry.delete(0, "end")
-        hours_entry.delete(0, "end")
+        monthly_entry.delete(0, "end")
 
     # Load existing jobs into UI
     for i, job in enumerate(jobs):
         create_job_row(i, job)
     update_total()
+
+    ctk.CTkButton(frame, text="Reverse Budgeting →", font=("Arial Rounded MT Bold", 14),
+                  fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                  corner_radius=8, width=180,
+                  command=switch_to_reverse).pack(anchor="se", side="bottom", padx=20, pady=10)
 
     return frame
