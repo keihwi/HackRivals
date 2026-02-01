@@ -64,7 +64,7 @@ def create_budgeting_tab(parent):
     total_label.pack(pady=(5, 10))
 
     # Monthly Revenue Summary
-    summary_frame = ctk.CTkFrame(frame, fg_color="#FFFFFF", corner_radius=15, width=400,
+    summary_frame = ctk.CTkFrame(frame, fg_color="#FFFFFF", corner_radius=15, width=400, height=80,
                                  border_width=2, border_color="#F7DDE8")
     summary_frame.pack(anchor="nw", padx=20, pady=(0, 20))
     summary_frame.pack_propagate(False)
@@ -77,6 +77,20 @@ def create_budgeting_tab(parent):
                                        font=("Arial Rounded MT Bold", 16),
                                        text_color="black", fg_color="transparent")
     summary_total_label.pack(pady=(5, 10))
+
+    # Savings Goal Box
+    savings_frame = ctk.CTkFrame(frame, fg_color="#FFFFFF", corner_radius=15, width=400, height=200,
+                                 border_width=2, border_color="#F7DDE8")
+    savings_frame.pack(anchor="nw", padx=20, pady=(0, 20))
+    savings_frame.pack_propagate(False)
+
+    ctk.CTkLabel(savings_frame, text="Savings Goal",
+                 font=("Bauhaus 93", 20), text_color="black",
+                 fg_color="transparent").pack(pady=(10, 5))
+
+    ctk.CTkLabel(savings_frame, text="Coming soon!",
+                 font=("Arial Rounded MT Bold", 14), text_color="gray",
+                 fg_color="transparent").pack(pady=(5, 10))
 
     # Job data storage
     data = load_data()

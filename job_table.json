@@ -11,12 +11,6 @@
       "rate": 17.0,
       "hours": 10.0,
       "monthly": 680.0
-    },
-    {
-      "name": "Mini Shop",
-      "rate": 5.0,
-      "hours": 9.0,
-      "monthly": 180.0
     }
   ]
 }
