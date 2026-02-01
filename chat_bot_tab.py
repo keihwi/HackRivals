@@ -5,7 +5,7 @@ from google.genai import types
 # 1. Initialize Client with v1 forcing
 # This usually bypasses the "v1beta not found" error
 client = genai.Client(
-    api_key="AIzaSyA6fdln8XzVq4dl-w6-38xZm6yrsFeWIEY",
+    api_key="empty",
     http_options={'api_version': 'v1'}
 )
 
