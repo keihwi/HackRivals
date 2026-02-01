@@ -12,8 +12,9 @@ HELPRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationship
 
 HEALTHRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
 }
-PROFESSIONALRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
-                         "Linkedin carreer resoures": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
+PROFESSIONALRESOURCES = {
+                        "Linkedin carreer resoures": "https://careers.linkedin.com/ResourceLibrary?selectedFilter=all",
+                        "How to write a strong resume": "https://careerservices.fas.harvard.edu/resources/create-a-strong-resume/",
 
 }
 
@@ -43,6 +44,16 @@ def create_resources_tab(parent):
     abuse_label.pack(anchor="w", padx=30, pady=(20, 5))
 
     for name, url in HELPRESOURCES.items():
+        link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Arial Rounded MT Bold", 14, "underline")) 
+        link.pack(anchor="w", padx=45, pady=2) 
+        link.bind("<Button-1>", lambda e, u=url: webbrowser.open(u))
+
+            # --- Section: Financial Abuse ---
+    # Since you have multiple dicts (HEALTHRESOURCES, etc.), we can loop through them too
+    abuse_label = ctk.CTkLabel(scroll_frame, text="Career Help", font=("Arial Rounded MT Bold", 18), text_color=("#434242"))
+    abuse_label.pack(anchor="w", padx=30, pady=(20, 5))
+
+    for name, url in PROFESSIONALRESOURCES.items():
         link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Arial Rounded MT Bold", 14, "underline")) 
         link.pack(anchor="w", padx=45, pady=2) 
         link.bind("<Button-1>", lambda e, u=url: webbrowser.open(u))
