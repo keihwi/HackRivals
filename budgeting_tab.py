@@ -23,7 +23,7 @@ def load_expense_data():
     if os.path.exists(EXPENSE_DATA_FILE):
         with open(EXPENSE_DATA_FILE, "r") as f:
             return json.load(f)
-    return {"api_config": {"api_key": "", "account_id": ""}, "transactions": [], "unsorted_transactions": []}
+    return {"api_config": {"api_key": "", "account_id": ""}, "transactions": [], "unsorted_transactions": [], "cleared_ids": []}
 
 
 def save_expense_data(data):
@@ -123,17 +123,44 @@ def create_budgeting_tab(parent):
                  font=("Cooper Black", 20), text_color="black",
                  fg_color="transparent").pack(pady=(10, 5))
 
-    ctk.CTkLabel(savings_frame, text="Coming soon!",
-                 font=("Arial Rounded MT Bold", 14), text_color="gray",
-                 fg_color="transparent").pack(pady=(5, 10))
+    savings_budget_label = ctk.CTkLabel(savings_frame, text="Budget: $0.00",
+                                        font=("Arial Rounded MT Bold", 11), text_color="black")
+    savings_budget_label.pack()
+
+    savings_progress = ctk.CTkProgressBar(savings_frame, progress_color="#B8D4E3",
+                                          fg_color="#E8E8E8", height=14, corner_radius=7)
+    savings_progress.pack(fill="x", padx=20, pady=5)
+    savings_progress.set(1.0)
+
+    savings_remaining_label = ctk.CTkLabel(savings_frame, text="Remaining: $0.00",
+                                           font=("Arial Rounded MT Bold", 10), text_color="gray")
+    savings_remaining_label.pack(pady=(0, 10))
 
     # RIGHT CONTAINER (expense sorting)
     right_container = ctk.CTkFrame(main_container, fg_color="#FFFFFF", corner_radius=15,
                                    border_width=2, border_color="#F7DDE8")
     right_container.pack(side="right", fill="both", expand=True, padx=(0, 20), pady=20)
 
-    ctk.CTkLabel(right_container, text="Expense Sorting", font=("Cooper Black", 20),
-                 text_color="black", fg_color="transparent").pack(pady=(10, 5))
+    sorting_header_frame = ctk.CTkFrame(right_container, fg_color="transparent")
+    sorting_header_frame.pack(fill="x", padx=10, pady=(10, 5))
+
+    ctk.CTkLabel(sorting_header_frame, text="Expense Sorting", font=("Cooper Black", 20),
+                 text_color="black", fg_color="transparent").pack(side="left", padx=10)
+
+    def clear_sorting():
+        ed = load_expense_data()
+        cleared = ed.get("cleared_ids", [])
+        cleared.extend(t["id"] for t in ed["transactions"])
+        ed["cleared_ids"] = cleared
+        ed["transactions"] = []
+        save_expense_data(ed)
+        refresh_sorted_lists()
+        update_progress_bars()
+
+    clear_btn = ctk.CTkButton(sorting_header_frame, text="Clear", font=("Arial Rounded MT Bold", 12),
+                               fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                               corner_radius=8, width=60, command=clear_sorting)
+    clear_btn.pack(side="right", padx=10)
 
     # Three-column grid
     columns_frame = ctk.CTkFrame(right_container, fg_color="transparent")
@@ -329,8 +356,10 @@ def create_budgeting_tab(parent):
         total = get_total_revenue()
         wants_budget = total * 0.30
         needs_budget = total * 0.50
+        savings_budget = total * 0.20
         wants_budget_label.configure(text=f"Budget: ${wants_budget:,.2f}")
         needs_budget_label.configure(text=f"Budget: ${needs_budget:,.2f}")
+        savings_budget_label.configure(text=f"Budget: ${savings_budget:,.2f}")
         update_progress_bars()
 
     def update_progress_bars():
@@ -347,6 +376,13 @@ def create_budgeting_tab(parent):
 
         wants_progress.set(min(wants_spent / wants_budget, 1.0) if wants_budget > 0 else 0)
         needs_progress.set(min(needs_spent / needs_budget, 1.0) if needs_budget > 0 else 0)
+
+        savings_budget = total * 0.20
+        wants_overflow = max(0, wants_spent - wants_budget)
+        needs_overflow = max(0, needs_spent - needs_budget)
+        savings_remaining = max(0, savings_budget - wants_overflow - needs_overflow)
+        savings_progress.set(savings_remaining / savings_budget if savings_budget > 0 else 1.0)
+        savings_remaining_label.configure(text=f"Remaining: ${savings_remaining:,.2f}")
 
     def refresh_sorted_lists():
         ed = load_expense_data()
@@ -425,6 +461,7 @@ def create_budgeting_tab(parent):
 
         existing_ids = {t["id"] for t in ed["transactions"]}
         existing_ids.update(t["id"] for t in ed["unsorted_transactions"])
+        existing_ids.update(ed.get("cleared_ids", []))
 
         new_count = 0
         for item in raw:
