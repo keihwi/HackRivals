@@ -129,7 +129,9 @@ def create_subscriptions_tab(parent):
     def render_stats(frame):
         for widget in frame.winfo_children():
             widget.destroy()
-        
+            
+        plt.close('all')
+
         subs = load_subs()
         if not subs:
             ctk.CTkLabel(frame, text="NO DATA TO ANALYZE", font=("Bauhaus 93", 20)).pack(pady=100)

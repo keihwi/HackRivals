@@ -3,6 +3,8 @@ import customtkinter as ctk
 from PIL import Image
 from PIL import ImageTk
 import os
+import sys
+import matplotlib.pyplot as plt
 
 from budgeting_tab import create_budgeting_tab
 from subscriptions_tab import create_subscriptions_tab
@@ -37,6 +39,9 @@ class GirlMath(ctk.CTk):
 
         # Prevents user from making it smaller than 400x300 pixels
         self.minsize(400, 300)
+
+        # Tells app what to do when closed
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         # Show login screen
         self.show_login()
@@ -133,6 +138,17 @@ class GirlMath(ctk.CTk):
 
         #Go back to login
         self.show_login()
+
+    def on_closing(self):
+        """Cleanly shuts down everything to prevent background errors"""
+        try:
+            plt.close('all') # Closes all Matplotlib figures
+        except:
+            pass
+        
+        self.quit()      # Stops the mainloop
+        self.destroy()   # Destroys the widgets
+        os._exit(0)      # Forcefully kills the process to prevent the DPI error
 
 if __name__ == "__main__":
     app = GirlMath()
