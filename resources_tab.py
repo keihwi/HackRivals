@@ -13,6 +13,8 @@ HELPRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationship
 HEALTHRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
 }
 PROFESSIONALRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
+                         "Linkedin carreer resoures": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
+
 }
 
 
@@ -27,11 +29,11 @@ def create_resources_tab(parent):
     title.pack(pady=(10, 20))
 
     # --- Section: Credit Score ---
-    credit_label = ctk.CTkLabel(scroll_frame, text="Free credit score checks:", font=("Arial Rounded MT Bold", 18))
+    credit_label = ctk.CTkLabel(scroll_frame, text="Free Credit Score Checks:", font=("Arial Rounded MT Bold", 18))
     credit_label.pack(anchor="w", padx=30, pady=(10, 5))
     
     for name, url in CREDITRESOURCES.items():
-        link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Verdana", 14, "underline")) 
+        link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Arial Rounded MT Bold", 14, "underline")) 
         link.pack(anchor="w", padx=45, pady=2) 
         link.bind("<Button-1>", lambda e, u=url: webbrowser.open(u))
 
@@ -41,7 +43,7 @@ def create_resources_tab(parent):
     abuse_label.pack(anchor="w", padx=30, pady=(20, 5))
 
     for name, url in HELPRESOURCES.items():
-        link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Verdana", 14, "underline")) 
+        link = ctk.CTkLabel(scroll_frame, text=name, text_color="#1f538d", cursor="hand2", font=("Arial Rounded MT Bold", 14, "underline")) 
         link.pack(anchor="w", padx=45, pady=2) 
         link.bind("<Button-1>", lambda e, u=url: webbrowser.open(u))
 
