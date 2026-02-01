@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "name": "Cashier",
+      "monthly": 1600.0
+    },
+    {
+      "name": "Waiter",
+      "monthly": 700.0
+    }
+  ]
+}
