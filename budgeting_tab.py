@@ -50,7 +50,7 @@ def create_budgeting_tab(parent):
 
     # Reverse Budgeting button at the bottom
     reverse_btn = ctk.CTkButton(frame, text="Reverse Budgeting →", font=("Arial Rounded MT Bold", 14),
-                  fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                  fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="#434242",
                   corner_radius=8, width=180,
                   command=switch_to_reverse)
     reverse_btn.pack(anchor="se", side="bottom", padx=20, pady=10)
@@ -71,7 +71,7 @@ def create_budgeting_tab(parent):
     jobs_frame.pack_propagate(False)
 
     ctk.CTkLabel(jobs_frame, text="Jobs", font=("Cooper Black", 20),
-                 text_color="black", fg_color="transparent").pack(pady=(10, 5))
+                 text_color="#434242", fg_color="transparent").pack(pady=(10, 5))
 
     input_frame = ctk.CTkFrame(jobs_frame, fg_color="transparent")
     input_frame.pack(padx=10, pady=5, fill="x")
@@ -86,7 +86,7 @@ def create_budgeting_tab(parent):
 
     add_btn = ctk.CTkButton(input_frame, text="Add", font=("Arial Rounded MT Bold", 14),
                             fg_color="#F7DDE8", hover_color="#EBC5D6",
-                            text_color="black", corner_radius=8, width=60,
+                            text_color="#434242", corner_radius=8, width=60,
                             command=lambda: add_job())
     add_btn.pack(side="right")
 
@@ -94,7 +94,7 @@ def create_budgeting_tab(parent):
     job_list_frame.pack(padx=10, pady=5, fill="x")
 
     total_label = ctk.CTkLabel(jobs_frame, text="Total Monthly Revenue: $0.00",
-                               font=("Cooper Black", 14), text_color="black",
+                               font=("Cooper Black", 14), text_color="#434242",
                                fg_color="transparent")
     total_label.pack(pady=(5, 10))
 
@@ -105,12 +105,12 @@ def create_budgeting_tab(parent):
     summary_frame.pack_propagate(False)
 
     ctk.CTkLabel(summary_frame, text="Monthly Revenue Summary",
-                 font=("Cooper Black", 20), text_color="black",
+                 font=("Cooper Black", 20), text_color="#434242",
                  fg_color="transparent").pack(pady=(10, 5))
 
     summary_total_label = ctk.CTkLabel(summary_frame, text="Total: $0.00",
                                        font=("Arial Rounded MT Bold", 16),
-                                       text_color="black", fg_color="transparent")
+                                       text_color="#434242", fg_color="transparent")
     summary_total_label.pack(pady=(5, 10))
 
     # Savings Goal Box
@@ -120,7 +120,7 @@ def create_budgeting_tab(parent):
     savings_frame.pack_propagate(False)
 
     ctk.CTkLabel(savings_frame, text="Savings Goal",
-                 font=("Cooper Black", 20), text_color="black",
+                 font=("Cooper Black", 20), text_color="#434242",
                  fg_color="transparent").pack(pady=(10, 5))
 
     ctk.CTkLabel(savings_frame, text="Coming soon!",
@@ -133,7 +133,7 @@ def create_budgeting_tab(parent):
     right_container.pack(side="right", fill="both", expand=True, padx=(0, 20), pady=20)
 
     ctk.CTkLabel(right_container, text="Expense Sorting", font=("Cooper Black", 20),
-                 text_color="black", fg_color="transparent").pack(pady=(10, 5))
+                 text_color="#434242", fg_color="transparent").pack(pady=(10, 5))
 
     # Three-column grid
     columns_frame = ctk.CTkFrame(right_container, fg_color="transparent")
@@ -148,10 +148,10 @@ def create_budgeting_tab(parent):
     wants_col.grid(row=0, column=0, sticky="nsew", padx=5)
 
     ctk.CTkLabel(wants_col, text="WANTS", font=("Cooper Black", 16),
-                 text_color="black").pack(pady=(5, 2))
+                 text_color="#434242").pack(pady=(5, 2))
 
     wants_budget_label = ctk.CTkLabel(wants_col, text="Budget: $0.00",
-                                      font=("Arial Rounded MT Bold", 11), text_color="black")
+                                      font=("Arial Rounded MT Bold", 11), text_color="#434242")
     wants_budget_label.pack()
 
     wants_progress = ctk.CTkProgressBar(wants_col, progress_color="#F7DDE8",
@@ -171,14 +171,14 @@ def create_budgeting_tab(parent):
     sort_col.grid(row=0, column=1, sticky="nsew", padx=5)
 
     ctk.CTkLabel(sort_col, text="SORTING", font=("Cooper Black", 16),
-                 text_color="black").pack(pady=(5, 10))
+                 text_color="#434242").pack(pady=(5, 10))
 
     # API config inputs
     api_config_frame = ctk.CTkFrame(sort_col, fg_color="transparent")
     api_config_frame.pack(fill="x", padx=5, pady=(0, 5))
 
     ctk.CTkLabel(api_config_frame, text="GirlMath", font=("Cooper Black", 14),
-                 text_color="black").pack(pady=2)
+                 text_color="#434242").pack(pady=2)
 
     account_id_entry = ctk.CTkEntry(api_config_frame, placeholder_text="Account ID",
                                     font=("Arial Rounded MT Bold", 10), corner_radius=8, height=28)
@@ -205,12 +205,12 @@ def create_budgeting_tab(parent):
     card_frame.pack_propagate(False)
 
     card_desc_label = ctk.CTkLabel(card_frame, text="No transactions",
-                                   font=("Arial Rounded MT Bold", 13), text_color="black",
+                                   font=("Arial Rounded MT Bold", 13), text_color="#434242",
                                    wraplength=150)
     card_desc_label.pack(pady=(15, 5))
 
     card_amount_label = ctk.CTkLabel(card_frame, text="",
-                                     font=("Cooper Black", 16), text_color="black")
+                                     font=("Cooper Black", 16), text_color="#434242")
     card_amount_label.pack()
 
     # Sort buttons
@@ -218,19 +218,19 @@ def create_budgeting_tab(parent):
     btn_frame.pack(pady=5)
 
     want_btn = ctk.CTkButton(btn_frame, text="Want", font=("Arial Rounded MT Bold", 13),
-                             fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                             fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="#434242",
                              corner_radius=8, width=70,
                              command=lambda: sort_transaction("want"))
     want_btn.pack(side="left", padx=5)
 
     need_btn = ctk.CTkButton(btn_frame, text="Need", font=("Arial Rounded MT Bold", 13),
-                             fg_color="#D5ECD4", hover_color="#BDD9BC", text_color="black",
+                             fg_color="#D5ECD4", hover_color="#BDD9BC", text_color="#434242",
                              corner_radius=8, width=70,
                              command=lambda: sort_transaction("need"))
     need_btn.pack(side="left", padx=5)
 
     fetch_btn = ctk.CTkButton(sort_col, text="Fetch Transactions", font=("Arial Rounded MT Bold", 12),
-                              fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                              fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="#434242",
                               corner_radius=8, width=140,
                               command=lambda: fetch_transactions())
     fetch_btn.pack(pady=(10, 5))
@@ -244,10 +244,10 @@ def create_budgeting_tab(parent):
     needs_col.grid(row=0, column=2, sticky="nsew", padx=5)
 
     ctk.CTkLabel(needs_col, text="NEEDS", font=("Cooper Black", 16),
-                 text_color="black").pack(pady=(5, 2))
+                 text_color="#434242").pack(pady=(5, 2))
 
     needs_budget_label = ctk.CTkLabel(needs_col, text="Budget: $0.00",
-                                      font=("Arial Rounded MT Bold", 11), text_color="black")
+                                      font=("Arial Rounded MT Bold", 11), text_color="#434242")
     needs_budget_label.pack()
 
     needs_progress = ctk.CTkProgressBar(needs_col, progress_color="#D5ECD4",
@@ -297,11 +297,11 @@ def create_budgeting_tab(parent):
 
         text = f"{job['name']}  —  ${job['monthly']:,.2f}/mo"
         ctk.CTkLabel(row, text=text, font=("Arial Rounded MT Bold", 11),
-                     text_color="black", fg_color="transparent").pack(side="left", padx=8, pady=4)
+                     text_color="#434242", fg_color="transparent").pack(side="left", padx=8, pady=4)
 
         del_btn = ctk.CTkButton(row, text="✕", width=28, height=28,
                                 font=("Arial Rounded MT Bold", 12), fg_color="#F7DDE8",
-                                hover_color="#EBC5D6", text_color="black",
+                                hover_color="#EBC5D6", text_color="#434242",
                                 corner_radius=8, command=lambda i=index: delete_job(i))
         del_btn.pack(side="right", padx=5, pady=4)
 
@@ -361,14 +361,14 @@ def create_budgeting_tab(parent):
                 row = ctk.CTkFrame(wants_list, fg_color="#FFFFFF", corner_radius=6)
                 row.pack(fill="x", pady=2, padx=2)
                 ctk.CTkLabel(row, text=f"{t['description']}", font=("Arial Rounded MT Bold", 10),
-                             text_color="black").pack(side="left", padx=5, pady=3)
+                             text_color="#434242").pack(side="left", padx=5, pady=3)
                 ctk.CTkLabel(row, text=f"${t['amount']:.2f}", font=("Arial Rounded MT Bold", 10),
                              text_color="gray").pack(side="right", padx=5, pady=3)
             elif t.get("category") == "need":
                 row = ctk.CTkFrame(needs_list, fg_color="#FFFFFF", corner_radius=6)
                 row.pack(fill="x", pady=2, padx=2)
                 ctk.CTkLabel(row, text=f"{t['description']}", font=("Arial Rounded MT Bold", 10),
-                             text_color="black").pack(side="left", padx=5, pady=3)
+                             text_color="#434242").pack(side="left", padx=5, pady=3)
                 ctk.CTkLabel(row, text=f"${t['amount']:.2f}", font=("Arial Rounded MT Bold", 10),
                              text_color="gray").pack(side="right", padx=5, pady=3)
 

@@ -34,5 +34,11 @@
         "category": "Entertainment",
         "cost": 13.22,
         "date": "1st"
+    },
+    {
+        "name": "GOODNOTES",
+        "category": "Productivity",
+        "cost": 6.12,
+        "date": "19th"
     }
 ]
