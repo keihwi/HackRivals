@@ -88,15 +88,15 @@ class GirlMath(ctk.CTk):
         self.fields_inner = ctk.CTkFrame(self.fields_frame, fg_color="transparent")
         self.fields_inner.place(relx=0.5, rely=0.5, anchor="center")
 
-        self.label = ctk.CTkLabel(self.fields_inner, text="Welcome!", font=("Bauhaus 93", 24))
+        self.label = ctk.CTkLabel(self.fields_inner, text="Welcome!", font=("Cooper Black", 24), text_color=("#434242"))
         self.label.pack(pady=12, padx=10)
 
         # Show="*" means it will add asterisks as passphrase is typed in. Throws onto screen.
-        self.passphrase_entry = ctk.CTkEntry(self.fields_inner, placeholder_text="passphrase", show="*", font=("Bauhaus 93", 15), justify="center" )
+        self.passphrase_entry = ctk.CTkEntry(self.fields_inner, placeholder_text="passphrase", show="*", font=("Cooper Black", 15), placeholder_text_color=("#D4D2CE"), text_color=("#434242"), justify="center" )
         self.passphrase_entry.pack(pady=12, padx=10)
 
         # creates a button and calls login function below. Throws it onto the window.
-        self.login_button = ctk.CTkButton(self.fields_inner, text="Login", command=self.login_action, font=("Bauhaus 93", 16))
+        self.login_button = ctk.CTkButton(self.fields_inner, text="login", command=self.login_action, font=("Cooper Black", 16), text_color=("#434242"))
         self.login_button.pack(pady=12, padx=10)
 
     def login_action(self):
@@ -107,13 +107,13 @@ class GirlMath(ctk.CTk):
             # Show dashboard
             self.show_dashboard()
         else:
-            self.label.configure(text="Wrong passphrase!", text_color="red", font=("Bauhaus 93", 16))
+            self.label.configure(text="Wrong Passphrase!", text_color="#434242", font=("Cooper Black", 24))
 
     # Show Dashboard Function
     def show_dashboard(self):
         self.tabs = ctk.CTkTabview(self)
         self.tabs.pack(padx=20, pady=20, fill="both", expand=True)
-        self.tabs._segmented_button.configure(font=("Bauhaus 93", 20))
+        self.tabs._segmented_button.configure(font=("Cooper Black", 20))
 
         # Add tabs
         self.tabs.add("Budgeting")

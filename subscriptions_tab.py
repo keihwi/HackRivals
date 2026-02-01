@@ -30,7 +30,7 @@ def create_subscriptions_tab(parent):
     # Fixed: Removed segmented_button_fg_color="transparent" to prevent ValueError
     sub_tabs = ctk.CTkTabview(main_container)
     sub_tabs.pack(fill="both", expand=True, padx=10, pady=10)
-    sub_tabs._segmented_button.configure(font=("Bauhaus 93", 16))
+    sub_tabs._segmented_button.configure(font=("Cooper Black", 16))
     
     tab_home = sub_tabs.add("Home")
     tab_categories = sub_tabs.add("Categories")
@@ -54,31 +54,47 @@ def create_subscriptions_tab(parent):
         info_box = ctk.CTkFrame(frame, corner_radius=20, border_width=2)
         info_box.pack(fill="x", pady=10, padx=20)
 
-        ctk.CTkLabel(info_box, text=f"${monthly_total:,.2f}", font=("Bauhaus 93", 50)).pack(pady=(20, 0))
-        ctk.CTkLabel(info_box, text="MONTHLY SPENDING", font=("Bauhaus 93", 14)).pack()
+        ctk.CTkLabel(info_box, text=f"${monthly_total:,.2f}", font=("Cooper Black", 50)).pack(pady=(20, 0))
+        ctk.CTkLabel(info_box, text="MONTHLY SPENDING", font=("Cooper Black", 14)).pack()
 
         split_frame = ctk.CTkFrame(info_box, fg_color="transparent")
         split_frame.pack(fill="x", pady=20)
         
-        ctk.CTkLabel(split_frame, text=f"ANNUAL: ${annual_total:,.2f}", font=("Bauhaus 93", 16)).pack(side="left", expand=True)
-        ctk.CTkLabel(split_frame, text=f"SUBSCRIPTIONS: {len(subs)}", font=("Bauhaus 93", 16)).pack(side="left", expand=True)
+        ctk.CTkLabel(split_frame, text=f"ANNUAL: ${annual_total:,.2f}", font=("Cooper Black", 16)).pack(side="left", expand=True)
+        ctk.CTkLabel(split_frame, text=f"SUBSCRIPTIONS: {len(subs)}", font=("Cooper Black", 16)).pack(side="left", expand=True)
 
         # Scrollable list for records
         content_scroll = ctk.CTkScrollableFrame(frame, fg_color="transparent")
         content_scroll.pack(fill="both", expand=True, padx=20)
 
-        ctk.CTkLabel(content_scroll, text="UPCOMING RENEWALS", font=("Bauhaus 93", 20)).pack(anchor="w", pady=(10, 5))
+        ctk.CTkLabel(content_scroll, text="UPCOMING RENEWALS", font=("Cooper Black", 20)).pack(anchor="w", pady=(10, 5))
         # Simple display of the last 3 entries
         for s in subs[-3:]:
-            ctk.CTkLabel(content_scroll, text=f"• {s['name']} - Renewal: {s['date']}", font=("Arial", 12)).pack(anchor="w", padx=15)
+            ctk.CTkLabel(content_scroll, text=f"• {s['name']} - Renewal: {s['date']}", font=("Arial Rounded MT Bold", 12)).pack(anchor="w", padx=15)
 
-        ctk.CTkLabel(content_scroll, text="ALL SUBSCRIPTIONS", font=("Bauhaus 93", 20)).pack(anchor="w", pady=(20, 5))
-        for s in subs:
-            item = ctk.CTkFrame(content_scroll, height=40, corner_radius=10)
+        ctk.CTkLabel(content_scroll, text="ALL SUBSCRIPTIONS", font=("Cooper Black", 20)).pack(anchor="w", pady=(20, 5))
+        for i, s in enumerate(subs):
+            item = ctk.CTkFrame(content_scroll, height=50, corner_radius=10)
             item.pack(fill="x", pady=3, padx=5)
-            ctk.CTkLabel(item, text=f"{s['name']}", font=("Arial", 13, "bold")).pack(side="left", padx=15)
-            ctk.CTkLabel(item, text=f"{s['category']}", font=("Arial", 11), text_color="gray").pack(side="left")
-            ctk.CTkLabel(item, text=f"${s['cost']}/mo", font=("Arial", 13, "bold")).pack(side="right", padx=15)
+            
+            ctk.CTkLabel(item, text=f"{s['name']}", font=("Arial Rounded MT Bold", 13, "bold")).pack(side="left", padx=(15, 5))
+            ctk.CTkLabel(item, text=f"({s['category']})", font=("Arial Rounded MT Bold", 11), text_color="gray").pack(side="left")
+
+            # The Delete Button
+            del_btn = ctk.CTkButton(item, text="X", width=30, height=30, 
+                                    fg_color="#FF6B6B", hover_color="#FF5252",
+                                    font=("Arial Rounded MT Bold", 12, "bold"),
+                                    command=lambda idx=i: delete_subscription(idx))
+            del_btn.pack(side="right", padx=10)
+
+            ctk.CTkLabel(item, text=f"${float(s['cost']):,.2f}/mo", font=("Arial Rounded MT Bold", 13, "bold")).pack(side="right", padx=10)
+
+    def delete_subscription(index):
+        subs = load_subs()
+        if 0 <= index < len(subs):
+            subs.pop(index)
+            save_subs(subs)
+            refresh_all()
 
     # --- PAGE 2: CATEGORIES ---
     def add_sub_logic(cat):
@@ -116,7 +132,7 @@ def create_subscriptions_tab(parent):
         btn = ctk.CTkButton(
             cat_container, 
             text=cat.upper(), 
-            font=("Bauhaus 93", 15), 
+            font=("Cooper Black", 15), 
             width=170, 
             height=90, 
             corner_radius=15,
@@ -134,7 +150,7 @@ def create_subscriptions_tab(parent):
 
         subs = load_subs()
         if not subs:
-            ctk.CTkLabel(frame, text="NO DATA TO ANALYZE", font=("Bauhaus 93", 20)).pack(pady=100)
+            ctk.CTkLabel(frame, text="NO DATA TO ANALYZE", font=("Cooper Black", 20)).pack(pady=100)
             return
 
         # Prepare Categorical Totals
@@ -157,9 +173,9 @@ def create_subscriptions_tab(parent):
             autopct='%1.1f%%', 
             startangle=140,
             colors=colors,
-            textprops={'fontname': 'Arial', 'weight': 'bold'}
+            textprops={'fontname': 'Arial Rounded MT Bold', 'weight': 'bold'}
         )
-        ax.set_title("YEARLY SPENDING BY CATEGORY", fontdict={'family': 'Bauhaus 93', 'size': 18})
+        ax.set_title("YEARLY SPENDING BY CATEGORY", fontdict={'family': 'Cooper Black', 'size': 18})
 
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas.draw()
@@ -170,7 +186,7 @@ def create_subscriptions_tab(parent):
         key_scroll.pack(fill="x", padx=20, pady=10)
         
         for cat, total in cat_data.items():
-            ctk.CTkLabel(key_scroll, text=f" [{cat}: ${total:,.2f}/yr] ", font=("Arial", 12, "bold")).pack(side="left", padx=10)
+            ctk.CTkLabel(key_scroll, text=f" [{cat}: ${total:,.2f}/yr] ", font=("Arial Rounded MT Bold", 12, "bold")).pack(side="left", padx=10)
 
     # Initial Render
     refresh_all()

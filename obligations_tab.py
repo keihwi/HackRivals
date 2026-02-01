@@ -63,7 +63,7 @@ def create_obligations_tab(parent):
     scroll_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
     # Add title to top
-    label = ctk.CTkLabel(scroll_frame, text="Obligations Diary", font=("Bauhaus 93", 26))
+    label = ctk.CTkLabel(scroll_frame, text="Obligations Diary", font=("Cooper Black", 26))
     label.pack(pady=(10, 20))
 
     # Add warning label to ensure user knows to save
@@ -83,7 +83,7 @@ def create_obligations_tab(parent):
         section_frame.pack(fill="x", pady=10, padx=5)
 
         # Write header to frame
-        header = ctk.CTkLabel(section_frame, text=title, font=("Bauhaus 93", 20))
+        header = ctk.CTkLabel(section_frame, text=title, font=("Cooper Black", 20))
         header.pack(pady=(10, 5), anchor="w", padx=10)
 
         # Date Row
