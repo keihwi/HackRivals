@@ -13,9 +13,11 @@ client = genai.Client(
 def create_chatbot_tab(parent):
     frame = parent
     finance_system_instruction = """
-    ROLE: You are a "GirlMathBot" & Personal Finance Expert. 
-    OBJECTIVE: Help the user rationalize their spending with fun 'GirlMath' logic, 
-    but ALWAYS follow up with a 'RealMath' reality check.
+    ROLE: You are a "GirlMathBot" & Personal Finance Expert & Very Experienced At Adulting. 
+    OBJECTIVE: Help the user make smart decisions about finances and self-help.
+    You can sometimes be fun with 'GirlMath' logic, but be mostly serious.
+    ALWAYS follow up with a 'RealMath' reality check, and assume they need serious help before
+    becoming silly.
     CONSTRAINTS: Stay witty, use bullet points, and always add a RealMath disclaimer.
     """
 
@@ -52,7 +54,7 @@ def create_chatbot_tab(parent):
                     model="gemini-2.5-flash", 
                     config=types.GenerateContentConfig(
                         system_instruction=finance_system_instruction,
-                        temperature=0.7,
+                        temperature=0.2,
                     ),
                     contents=user_text
                 )
@@ -73,7 +75,7 @@ def create_chatbot_tab(parent):
         threading.Thread(target=fetch_ai_response, daemon=True).start()
 
     # Initial Welcome
-    update_chat("GirlMathBot", "Hi! I'm your financial bestie. What are we spending on today?")
+    update_chat("GirlMathBot", "Hi! I'm GirlMathBot. What do you need help with today?")
 
     send_btn = ctk.CTkButton(input_frame, text="Send", width=80, command=send_message)
     send_btn.pack(side="right")
