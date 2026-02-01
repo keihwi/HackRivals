@@ -5,7 +5,7 @@ from google.genai import types
 # 1. Initialize Client with v1 forcing
 # This usually bypasses the "v1beta not found" error
 client = genai.Client(
-    api_key="empty",
+    api_key="replace with key",
     http_options={'api_version': 'v1'}
 )
 
@@ -35,33 +35,12 @@ def create_chatbot_tab(parent):
         # 1. Update the chat with your message ONLY ONCE
         update_chat("You: " + user_text)
         user_entry.delete(0, "end")
-
-        try:
-            # 2. Try the best model your key showed support for
-            response = client.models.generate_content(
-                model="gemini-2.5-flash", 
-                contents=user_text
+        # 2. Try the best model your key showed support for
+        response = client.models.generate_content(
+            model="gemini-2.5-flash", 
+            contents=user_text
             )
-            update_chat("GirlMathBot: " + response.text)
-            
-        except Exception as e:
-            # 3. If 2.5 fails, try 2.0
-            print(f"Gemini 2.5 failed, trying 2.0...")
-            try:
-                response = client.models.generate_content(
-                    model="gemini-2.0-flash", 
-                    contents=user_text
-                )
-                update_chat("GirlMathBot: " + response.text)
-            except Exception as final_e:
-                # 4. Final safety net: list authorized models if everything fails
-                print(f"DEBUG: {final_e}")
-                try:
-                    authorized_models = [m.name for m in client.models.list()]
-                    print(f"Supported models: {authorized_models}")
-                    update_chat("Error: All models failed. See terminal for available models.")
-                except:
-                    update_chat("Error: Connection failed. Check your API key.")
+        update_chat("GirlMathBot: " + response.text)
 
     send_btn = ctk.CTkButton(input_frame, text="Send", width=80, command=send_message)
     send_btn.pack(side="right")
