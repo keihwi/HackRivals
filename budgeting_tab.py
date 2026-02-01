@@ -177,10 +177,8 @@ def create_budgeting_tab(parent):
     api_config_frame = ctk.CTkFrame(sort_col, fg_color="transparent")
     api_config_frame.pack(fill="x", padx=5, pady=(0, 5))
 
-    api_key_entry = ctk.CTkEntry(api_config_frame, placeholder_text="API Key",
-                                 font=("Arial Rounded MT Bold", 10), corner_radius=8, height=28,
-                                 show="*")
-    api_key_entry.pack(fill="x", pady=2)
+    ctk.CTkLabel(api_config_frame, text="GirlMath", font=("Cooper Black", 14),
+                 text_color="black").pack(pady=2)
 
     account_id_entry = ctk.CTkEntry(api_config_frame, placeholder_text="Account ID",
                                     font=("Arial Rounded MT Bold", 10), corner_radius=8, height=28)
@@ -199,10 +197,6 @@ def create_budgeting_tab(parent):
                                          font=("Arial Rounded MT Bold", 9), text_color="gray")
     if saved_account_id:
         account_display_label.pack(pady=(0, 2))
-
-    # Load saved API key (masked in entry)
-    if expense_data["api_config"]["api_key"]:
-        api_key_entry.insert(0, expense_data["api_config"]["api_key"])
 
     # Transaction card
     card_frame = ctk.CTkFrame(sort_col, fg_color="#FFF5F9", corner_radius=12,
@@ -402,13 +396,11 @@ def create_budgeting_tab(parent):
         update_progress_bars()
 
     def fetch_transactions():
-        api_key = api_key_entry.get().strip()
         account_id = account_id_entry.get().strip()
 
         # Use saved values if fields are empty
         ed = load_expense_data()
-        if not api_key:
-            api_key = ed["api_config"].get("api_key", "")
+        api_key = ed["api_config"].get("api_key", "")
         if not account_id:
             account_id = ed["api_config"].get("account_id", "")
 
