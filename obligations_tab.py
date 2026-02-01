@@ -5,25 +5,28 @@ import os
 # Define the file name for saving data
 DATA_FILE = "obligations_data.json"
 
+# Save_Obligations function
 def save_obligations(cs_date_entry, cs_notes_box, ss_date_entry, ss_notes_box):
-    """Gathers text from widgets and saves to a JSON file."""
+    
+    # Gathers text from widgets and saves to a JSON file.
     data = {
         "child_support_date": cs_date_entry.get(),
         "child_support_notes": cs_notes_box.get("0.0", "end-1c"), # "end-1c" avoids adding an extra newline
         "spousal_support_date": ss_date_entry.get(),
-        "spousal_support_notes": ss_notes_box.get("0.0", "end-1c")
+        "spousal_support_notes": ss_notes_box.get("0.0", "end-1c") # same as above
     }
     
     try:
         with open(DATA_FILE, "w") as f:
             json.dump(data, f, indent=4)
         print("Data saved successfully.")
-        # Optional: You could add a small popup here saying "Saved!"
     except Exception as e:
         print(f"Error saving data: {e}")
 
+# Load obligations function
 def load_obligations(cs_date_entry, cs_notes_box, ss_date_entry, ss_notes_box):
-    """Checks if data file exists and populates widgets."""
+    
+    # Checks if data file exists and populates widgets.
     if not os.path.exists(DATA_FILE):
         return # No file to load
     
@@ -32,6 +35,7 @@ def load_obligations(cs_date_entry, cs_notes_box, ss_date_entry, ss_notes_box):
             data = json.load(f)
             
         # Clear existing text and insert saved data
+
         # Child Support
         cs_date_entry.delete(0, "end")
         cs_date_entry.insert(0, data.get("child_support_date", ""))
@@ -39,6 +43,8 @@ def load_obligations(cs_date_entry, cs_notes_box, ss_date_entry, ss_notes_box):
         cs_notes_box.delete("0.0", "end")
         cs_notes_box.insert("0.0", data.get("child_support_notes", ""))
         
+        # Clear existing text and insert saved data
+
         # Spousal Support
         ss_date_entry.delete(0, "end")
         ss_date_entry.insert(0, data.get("spousal_support_date", ""))
@@ -49,15 +55,18 @@ def load_obligations(cs_date_entry, cs_notes_box, ss_date_entry, ss_notes_box):
     except Exception as e:
         print(f"Error loading data: {e}")
 
+# Create Obligations Tab Function
 def create_obligations_tab(parent):
-    # 1. Scrollable Frame container
+
+    # Create the scrollable frame container
     scroll_frame = ctk.CTkScrollableFrame(parent, fg_color="transparent")
     scroll_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
-    # Main Title
+    # Add title to top
     label = ctk.CTkLabel(scroll_frame, text="Obligations Diary", font=("Bauhaus 93", 26))
     label.pack(pady=(10, 20))
 
+    # Add warning label to ensure user knows to save
     warning_label = ctk.CTkLabel(
         scroll_frame, 
         text="WARNING: Save your changes at the bottom of the page before exiting.", 
@@ -66,11 +75,14 @@ def create_obligations_tab(parent):
     )
     warning_label.pack(pady=(0, 5))
 
-    # --- Helper Function for UI ---
+    # Create Support Section HELPER FUNCTION!!!
     def create_support_section(title, parent_frame):
+
+        # Create frame with padding
         section_frame = ctk.CTkFrame(parent_frame)
         section_frame.pack(fill="x", pady=10, padx=5)
 
+        # Write header to frame
         header = ctk.CTkLabel(section_frame, text=title, font=("Bauhaus 93", 20))
         header.pack(pady=(10, 5), anchor="w", padx=10)
 
@@ -93,12 +105,12 @@ def create_obligations_tab(parent):
 
         return date_entry, notes_box
 
-    # 2. Create Sections
+    # Create sections in the scroller
     cs_date, cs_notes = create_support_section("Child Support", scroll_frame)
     ss_date, ss_notes = create_support_section("Spousal Support", scroll_frame)
 
-    # 3. Create Save Button
-    # We use a lambda to pass the specific widgets to our save function
+    # Lambda is used to pass specific widgets to the save function
+    # Save button calls the save obligations function
     save_btn = ctk.CTkButton(
         scroll_frame, 
         text="Save Changes", 
@@ -109,7 +121,7 @@ def create_obligations_tab(parent):
     )
     save_btn.pack(pady=30, padx=5)
 
-    # 4. Load Data Immediately
+    # Immediately load saved data
     load_obligations(cs_date, cs_notes, ss_date, ss_notes)
 
     return parent

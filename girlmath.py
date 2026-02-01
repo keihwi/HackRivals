@@ -5,7 +5,7 @@ from PIL import ImageTk
 import os
 
 from budgeting_tab import create_budgeting_tab
-from expenses_tab import create_expenses_tab
+from subscriptions_tab import create_subscriptions_tab
 from obligations_tab import create_obligations_tab
 from resources_tab import create_resources_tab
 from chat_bot_tab import create_chatbot_tab
@@ -112,7 +112,7 @@ class GirlMath(ctk.CTk):
 
         # Add tabs
         self.tabs.add("Budgeting")
-        self.tabs.add("Expenses")
+        self.tabs.add("Subscriptions")
         self.tabs.add("Obligations")
         self.tabs.add("Resources")
         self.tabs.add("ChatBot")
@@ -120,7 +120,7 @@ class GirlMath(ctk.CTk):
 
         # Populate each tab using the external files
         create_budgeting_tab(self.tabs.tab("Budgeting"))
-        create_expenses_tab(self.tabs.tab("Expenses"))
+        create_subscriptions_tab(self.tabs.tab("Subscriptions"))
         create_obligations_tab(self.tabs.tab("Obligations"))
         create_resources_tab(self.tabs.tab("Resources"))
         create_chatbot_tab(self.tabs.tab("ChatBot"))
