@@ -4,5 +4,35 @@
         "category": "Entertainment",
         "cost": 32.53,
         "date": "30th"
+    },
+    {
+        "name": "WHOOP",
+        "category": "Health",
+        "cost": 25.31,
+        "date": "Monthly"
+    },
+    {
+        "name": "NOTION PRO",
+        "category": "Productivity",
+        "cost": 12.99,
+        "date": "Monthly"
+    },
+    {
+        "name": "ROCKET MONEY",
+        "category": "Finance",
+        "cost": 67.69,
+        "date": "12th"
+    },
+    {
+        "name": "POWER BILL",
+        "category": "Utilities",
+        "cost": 40.0,
+        "date": "25th"
+    },
+    {
+        "name": "NETFLIX",
+        "category": "Entertainment",
+        "cost": 13.22,
+        "date": "1st"
     }
 ]
