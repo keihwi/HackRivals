@@ -9,7 +9,7 @@ CREDITRESOURCES = { "Myfico.com": "https://www.myfico.com/",
 #list of websites that contain health resources
 HELPRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
                  "Health Resources and Services Administration" : "https://www.hrsa.gov/",
-                 "Identifying and protecting youself from financia abuse":"https://www.womenslaw.org/about-abuse/forms-abuse/financial-abuse",
+                 "Identifying and protecting youself from financial abuse":"https://www.womenslaw.org/about-abuse/forms-abuse/financial-abuse",
 }
 #list of websites that contain professional resources.
 PROFESSIONALRESOURCES = {
