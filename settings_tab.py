@@ -7,4 +7,5 @@ def create_settings_tab(parent, logout_callback):
 
     logout_button = ctk.CTkButton(frame, text="Logout", command=logout_callback, font=("Bauhaus 93", 16))
     logout_button.pack(pady=12)
+    
     return frame

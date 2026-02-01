@@ -8,6 +8,7 @@ from budgeting_tab import create_budgeting_tab
 from expenses_tab import create_expenses_tab
 from obligations_tab import create_obligations_tab
 from resources_tab import create_resources_tab
+from chat_bot_tab import create_chatbot_tab
 from settings_tab import create_settings_tab
 
 
@@ -32,7 +33,7 @@ class GirlMath(ctk.CTk):
         self.after(200, lambda: self.iconbitmap(os.path.join(os.path.dirname(__file__), "images", "girl-math-logo-acronym.ico")))
 
         # Default window size, can be changed later
-        self.geometry("600x450")
+        self.geometry("800x450")
 
         # Prevents user from making it smaller than 400x300 pixels
         self.minsize(400, 300)
@@ -114,6 +115,7 @@ class GirlMath(ctk.CTk):
         self.tabs.add("Expenses")
         self.tabs.add("Obligations")
         self.tabs.add("Resources")
+        self.tabs.add("ChatBot")
         self.tabs.add("Settings")
 
         # Populate each tab using the external files
@@ -121,6 +123,7 @@ class GirlMath(ctk.CTk):
         create_expenses_tab(self.tabs.tab("Expenses"))
         create_obligations_tab(self.tabs.tab("Obligations"))
         create_resources_tab(self.tabs.tab("Resources"))
+        create_chatbot_tab(self.tabs.tab("ChatBot"))
         create_settings_tab(self.tabs.tab("Settings"), self.logout_action)
 
     # Logout Function
