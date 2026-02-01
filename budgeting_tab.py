@@ -28,6 +28,13 @@ def create_budgeting_tab(parent):
             widget.destroy()
         create_reverse_budgeting_tab(frame)
 
+    # Pack the Reverse Budgeting button first so it reserves space at the bottom
+    reverse_btn = ctk.CTkButton(frame, text="Reverse Budgeting →", font=("Arial Rounded MT Bold", 14),
+                  fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                  corner_radius=8, width=180,
+                  command=switch_to_reverse)
+    reverse_btn.pack(anchor="se", side="bottom", padx=20, pady=10)
+
     # Jobs Revenue Widget
     jobs_frame = ctk.CTkFrame(frame, fg_color="#FFFFFF", corner_radius=15, width=400,
                               border_width=2, border_color="#F7DDE8")
@@ -157,10 +164,5 @@ def create_budgeting_tab(parent):
     for i, job in enumerate(jobs):
         create_job_row(i, job)
     update_total()
-
-    ctk.CTkButton(frame, text="Reverse Budgeting →", font=("Arial Rounded MT Bold", 14),
-                  fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
-                  corner_radius=8, width=180,
-                  command=switch_to_reverse).pack(anchor="se", side="bottom", padx=20, pady=10)
 
     return frame
