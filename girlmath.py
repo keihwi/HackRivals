@@ -4,6 +4,7 @@ from PIL import Image
 from PIL import ImageTk
 import os
 import sys
+import json
 import matplotlib.pyplot as plt
 
 from budgeting_tab import create_budgeting_tab
@@ -29,6 +30,9 @@ class GirlMath(ctk.CTk):
         # this function uses the ctk.CTk blueprint to set up behind-the-scenes window stuff
         super().__init__()
 
+        self.passphrase = "1234"  # Default password
+        self.load_config()        # Load real password from file
+
         # title of the app
         self.title("GirlMath")
 
@@ -45,6 +49,33 @@ class GirlMath(ctk.CTk):
 
         # Show login screen
         self.show_login()
+
+    def load_config(self):
+        """Loads password from json, or creates default if missing."""
+        config_file = "config.json"
+        if os.path.exists(config_file):
+            try:
+                with open(config_file, 'r') as f:
+                    data = json.load(f)
+                    self.passphrase = data.get("passphrase", "1234")
+            except json.JSONDecodeError:
+                self.save_config() 
+        else:
+            self.save_config() 
+
+    def save_config(self):
+        """Saves current password to json."""
+        with open("config.json", 'w') as f:
+            json.dump({"passphrase": self.passphrase}, f)
+
+    def handle_password_change(self, old_pass, new_pass):
+        """Callback used by Settings tab to update password."""
+        if old_pass == self.passphrase:
+            self.passphrase = new_pass
+            self.save_config()
+            return True, "Password updated successfully!"
+        else:
+            return False, "Incorrect current passphrase."
 
     def show_login(self):
         # Main login container
@@ -100,8 +131,8 @@ class GirlMath(ctk.CTk):
         self.login_button.pack(pady=12, padx=10)
 
     def login_action(self):
-        # Passphrase
-        if self.passphrase_entry.get() == " ":
+        # Compare against the loaded passphrase variable
+        if self.passphrase_entry.get() == self.passphrase:
             # Remove login screen
             self.login_frame.destroy()
             # Show dashboard
@@ -129,7 +160,7 @@ class GirlMath(ctk.CTk):
         create_obligations_tab(self.tabs.tab("Obligations"))
         create_resources_tab(self.tabs.tab("Resources"))
         create_chatbot_tab(self.tabs.tab("ChatBot"))
-        create_settings_tab(self.tabs.tab("Settings"), self.logout_action)
+        create_settings_tab(self.tabs.tab("Settings"), self.logout_action, self.handle_password_change)
 
     # Logout Function
     def logout_action(self):
