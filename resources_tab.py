@@ -25,11 +25,11 @@ def create_resources_tab(parent):
     scroll_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
     # Main Title
-    title = ctk.CTkLabel(scroll_frame, text="Resources", font=("Bauhaus 93", 26))
+    title = ctk.CTkLabel(scroll_frame, text="Resources", font=("Cooper Black", 26), text_color=("#434242"))
     title.pack(pady=(10, 20))
 
     # --- Section: Credit Score ---
-    credit_label = ctk.CTkLabel(scroll_frame, text="Free Credit Score Checks:", font=("Arial Rounded MT Bold", 18))
+    credit_label = ctk.CTkLabel(scroll_frame, text="Free Credit Score Checks:", font=("Arial Rounded MT Bold", 18), text_color=("#434242"))
     credit_label.pack(anchor="w", padx=30, pady=(10, 5))
     
     for name, url in CREDITRESOURCES.items():
@@ -39,7 +39,7 @@ def create_resources_tab(parent):
 
     # --- Section: Financial Abuse ---
     # Since you have multiple dicts (HEALTHRESOURCES, etc.), we can loop through them too
-    abuse_label = ctk.CTkLabel(scroll_frame, text="Support & Safety:", font=("Arial Rounded MT Bold", 18))
+    abuse_label = ctk.CTkLabel(scroll_frame, text="Support & Safety:", font=("Arial Rounded MT Bold", 18), text_color=("#434242"))
     abuse_label.pack(anchor="w", padx=30, pady=(20, 5))
 
     for name, url in HELPRESOURCES.items():
