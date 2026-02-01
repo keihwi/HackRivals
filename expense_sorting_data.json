@@ -1,0 +1,8 @@
+{
+  "api_config": {
+    "api_key": "...",
+    "account_id": "..."
+  },
+  "transactions": [],
+  "unsorted_transactions": []
+}
