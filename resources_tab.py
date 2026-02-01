@@ -8,7 +8,8 @@ CREDITRESOURCES = { "Myfico.com": "https://www.myfico.com/",
 }
 
 HELPRESOURCES = { "Financial abuse help": "https://womenshealth.gov/relationships-and-safety/other-types/financial-abuse",
-                 "Health resources and services Administration" : "https://www.hrsa.gov/",
+                 "Health Resources and Services Administration" : "https://www.hrsa.gov/",
+                 "Identifying and protecting youself from financia abuse":"https://www.womenslaw.org/about-abuse/forms-abuse/financial-abuse",
 }
 
 PROFESSIONALRESOURCES = {
@@ -50,7 +51,7 @@ def create_resources_tab(parent):
 
             # --- Section: Financial Abuse ---
     # Since you have multiple dicts (HEALTHRESOURCES, etc.), we can loop through them too
-    abuse_label = ctk.CTkLabel(scroll_frame, text="Professional Resources", font=("Arial Rounded MT Bold", 18), text_color=("#434242"))
+    abuse_label = ctk.CTkLabel(scroll_frame, text="Professional Resources:", font=("Arial Rounded MT Bold", 18), text_color=("#434242"))
     abuse_label.pack(anchor="w", padx=30, pady=(20, 5))
 
     for name, url in PROFESSIONALRESOURCES.items():
