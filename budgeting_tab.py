@@ -124,7 +124,7 @@ def create_budgeting_tab(parent):
                  fg_color="transparent").pack(pady=(10, 5))
 
     savings_budget_label = ctk.CTkLabel(savings_frame, text="Budget: $0.00",
-                                        font=("Arial Rounded MT Bold", 11), text_color="black")
+                                        font=("Arial Rounded MT Bold", 11), text_color="#434242")
     savings_budget_label.pack()
 
     savings_progress = ctk.CTkProgressBar(savings_frame, progress_color="#B8D4E3",
@@ -145,7 +145,7 @@ def create_budgeting_tab(parent):
     sorting_header_frame.pack(fill="x", padx=10, pady=(10, 5))
 
     ctk.CTkLabel(sorting_header_frame, text="Expense Sorting", font=("Cooper Black", 20),
-                 text_color="black", fg_color="transparent").pack(side="left", padx=10)
+                 text_color="#434242", fg_color="transparent").pack(side="left", padx=10)
 
     def clear_sorting():
         ed = load_expense_data()
@@ -158,7 +158,7 @@ def create_budgeting_tab(parent):
         update_progress_bars()
 
     clear_btn = ctk.CTkButton(sorting_header_frame, text="Clear", font=("Arial Rounded MT Bold", 12),
-                               fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="black",
+                               fg_color="#F7DDE8", hover_color="#EBC5D6", text_color="#434242",
                                corner_radius=8, width=60, command=clear_sorting)
     clear_btn.pack(side="right", padx=10)
 

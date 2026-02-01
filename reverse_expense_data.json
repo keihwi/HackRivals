@@ -1,3 +1,11 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "description": "Cooking",
+      "amount": 350.0,
+      "frequency": 52,
+      "category": "need"
+    }
+  ],
+  "savings_goal": 500.0
 }
